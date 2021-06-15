@@ -1,20 +1,27 @@
 {
-  "name": "a",
+  "name": "a3-cli",
   "version": "0.0.1",
+  "description": "AtCoder でACしたソースコードをGitHub or ローカルに保存します",
   "main": "index.js",
+  "bin": {
+    "a3": "./dist/cli.js"
+  },
   "license": "MIT",
   "scripts": {
     "start": "tsc -w",
-    "dev": "ts-node --transpile-only ./src/index.ts"
+    "dev": "ts-node -T ./src/index.ts",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@types/node": "^15.0.3",
-    "eslint": "^7.26.0",
+    "@types/node": "^15.12.2",
+    "eslint": "^7.28.0",
     "eslint-config-sumikko": "^1.1.2",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.4"
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.2"
   },
   "dependencies": {
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "dotenv": "^10.0.0",
+    "lang2extension": "^0.1.4"
   }
 }
