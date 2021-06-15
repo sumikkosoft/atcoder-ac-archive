@@ -7,6 +7,25 @@
     "a3": "./dist/cli.js"
   },
   "license": "MIT",
+  "author": {
+    "name": "ivgtr",
+    "email": "ivgtr.me@gmail.com",
+    "url": "https://github.com/ivgtr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivgtr/atcoder-ac-archive.git"
+  },
+  "homepage": "https://github.com/ivgtr/atcoder-ac-archive#readme",
+  "bugs": {
+    "url": "https://github.com/ivgtr/atcoder-ac-archive/issues"
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "package.json",
+    "dist"
+  ],
   "scripts": {
     "start": "tsc -w",
     "dev": "ts-node -T ./src/index.ts",
