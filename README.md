@@ -2,8 +2,7 @@
 
 ---
 
-
-AtCoder でACしたソースコードをGitHub or ローカルに保存します
+AtCoder で AC したソースコードを GitHub or ローカルに保存します
 
 ## Usages
 
@@ -13,10 +12,10 @@ AtCoder でACしたソースコードをGitHub or ローカルに保存します
 $ npm install --global a3-cli
 ```
 
-Run
+##### Run
 
 ```shell
-$ a3 init
+$ a3 init && a3 run
 ```
 
 #### GitHub
