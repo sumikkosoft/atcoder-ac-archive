@@ -8,14 +8,16 @@ AtCoder で AC したソースコードを GitHub or ローカルに保存しま
 
 #### Local
 
+##### setup
+
 ```shell
 $ npm install --global a3-cli
 ```
 
-##### Run
-
 ```shell
-$ a3 init && a3 run
+$ a3 init
+// -> id,dirの設定
+$ a3 run
 ```
 
 #### GitHub
@@ -25,6 +27,10 @@ $ a3 init && a3 run
 1. この repository を Fork します
 1. `.github/workflows/schedule.yml` の[環境変数](https://github.com/ivgtr/atcoder-ac-archive/blob/master/.github/workflows/schedule.yml#L24-L31) を編集します:
    - **USER_ID:** 利用する AtCoder の ID
+
+## 進捗
+
+3%
 
 ## License
 
