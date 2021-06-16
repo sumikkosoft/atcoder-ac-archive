@@ -47,6 +47,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.10",
     "commander": "^8.0.0-2",
     "dotenv": "^10.0.0",
     "lang2extension": "^0.1.4",

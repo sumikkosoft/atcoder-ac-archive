@@ -68,6 +68,13 @@ export class DbService {
     }
     return undefined;
   }
+  getArchiveDir() {
+    if (this.database.has("configs")) {
+      const configs = this.database.get("configs") as ConfigSchema;
+      return configs.archive_dir;
+    }
+    return undefined;
+  }
   setArchiveDir(dir: string) {
     if (this.database.has("configs")) {
       const configs = this.database.get("configs") as ConfigSchema;
