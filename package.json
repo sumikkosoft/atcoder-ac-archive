@@ -52,7 +52,6 @@
     "lang2extension": "^0.1.4",
     "pjson": "^1.0.9",
     "prompts": "^2.4.1",
-    "simple-json-db": "^1.2.3",
     "update-notifier": "^5.1.0"
   }
 }

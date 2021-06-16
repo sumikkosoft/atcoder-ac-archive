@@ -12,38 +12,63 @@ const initializeDb = () => {
 };
 
 program
-  .command("init <USER_ID>")
-  .description("register ID")
-  .action((userId) => {
+  .command("init")
+  .description("初期化します")
+  .action(() => {
     const db = initializeDb();
-    commands.init({ db, userId });
+    commands.init({ db });
   });
 
 program
   .command("run")
-  .description("get your AC code")
+  .description("ソースコードを取得します")
   .action(() => {
     const db = initializeDb();
-    commands.run({ db });
+    if (db.getUserId()) {
+      commands.run({ db });
+    } else {
+      console.error("`a3 init` で初期化してください");
+    }
   });
 
-program
+const config = program
   .command("config")
-  .description("change your registered ID")
-  .arguments("[]")
-  .hook("preAction", (thisCommand, _actionCommand) => {
-    thisCommand.help();
-  })
-  .action((a, b, c, d) => {
-    console.log(a);
-    console.log(b);
-    console.log(c.name());
-    console.log(d);
+  .description("コンフィグの確認・設定")
+  .action(() => {
+    const db = initializeDb();
+    if (db.getUserId()) {
+      commands.config({ db });
+      config.help();
+    } else {
+      console.error("`a3 init` で初期化してください");
+    }
+  });
+config
+  .command("user.id <USER_ID>")
+  .description("登録しているuserIdを変更します")
+  .action((userId: string) => {
+    const db = initializeDb();
+    if (db.getUserId()) {
+      commands.config({ db, userId });
+    } else {
+      console.error("`a3 init` で初期化してください");
+    }
+  });
+config
+  .command("archive.dir <ARCHIVE_DIR>")
+  .description("登録しているarchiveDirを変更します")
+  .action((archiveDir: string) => {
+    const db = initializeDb();
+    if (db.getUserId()) {
+      commands.config({ db, archiveDir });
+    } else {
+      console.error("`a3 init` で初期化してください");
+    }
   });
 
 program.on("command:*", () => {
   console.error(
-    "Invalid command: %s\nUse `a3 --help` for a list of available commands.",
+    "Invalid command: %s\n`a3 --help` でコマンドリストを確認してください",
     program.args.join(" ")
   );
 });
@@ -54,7 +79,7 @@ export default (() => {
   program
     .name("a3")
     .usage("[command]")
-    .version(pjson.version, "-v, --version", "Show the a3-cli's version")
-    .helpOption("-h, --help", "display help for command")
+    .version(pjson.version, "-v, --version", "a3-cliのバージョンを表示します")
+    .helpOption("-h, --help", "コマンド一覧を表示します")
     .parse(process.argv);
 })();
