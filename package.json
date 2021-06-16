@@ -7,6 +7,9 @@
   "bin": {
     "a3": "./dist/cli.js"
   },
+  "engines": {
+    "node": ">= 12"
+  },
   "license": "MIT",
   "author": {
     "name": "ivgtr",
@@ -44,7 +47,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "commander": "^7.2.0",
+    "commander": "^8.0.0-2",
     "dotenv": "^10.0.0",
     "lang2extension": "^0.1.4",
     "pjson": "^1.0.9",
