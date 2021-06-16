@@ -1,11 +1,11 @@
-import { DbService } from "../utils/database";
+import type { DbService } from "../utils/database";
 
-export const init = async () => {
-  const db = new DbService();
-  if (db.getUserId()) {
-    console.log(db.getUserId());
-  } else {
-    const result = db.setUserId("ivgtr");
-    console.log(result);
-  }
+type Props = {
+  db: DbService;
+  userId: string;
+};
+
+export const init = async ({ db, userId }: Props) => {
+  const result = db.setUserId(userId);
+  console.log(result);
 };

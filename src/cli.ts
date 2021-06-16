@@ -4,17 +4,42 @@ import { program } from "commander";
 import pjson from "pjson";
 import updateNotifier from "update-notifier";
 import * as commands from "./commands";
+import { DbService } from "./utils/database";
 
-program.command("init").alias("i").description("register ID").action(commands.init);
+const initializeDb = () => {
+  const db = new DbService();
+  return db;
+};
 
-program.command("run").alias("r").description("get your AC code").action(commands.run);
+program
+  .command("init <USER_ID>")
+  .description("register ID")
+  .action((userId) => {
+    const db = initializeDb();
+    commands.init({ db, userId });
+  });
+
+program
+  .command("run")
+  .description("get your AC code")
+  .action(() => {
+    const db = initializeDb();
+    commands.run({ db });
+  });
 
 program
   .command("config")
-  .alias("c")
-  .option("-c, --change [USER_ID]", "Change a User ID", "")
   .description("change your registered ID")
-  .action(commands.config);
+  .arguments("[]")
+  .hook("preAction", (thisCommand, _actionCommand) => {
+    thisCommand.help();
+  })
+  .action((a, b, c, d) => {
+    console.log(a);
+    console.log(b);
+    console.log(c.name());
+    console.log(d);
+  });
 
 program.on("command:*", () => {
   console.error(
