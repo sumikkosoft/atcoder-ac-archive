@@ -32,6 +32,7 @@
     "dist"
   ],
   "scripts": {
+    "test": "jest",
     "workflow": "node --loader ts-node/esm ./src/index.ts",
     "watch": "tsc -w",
     "dev:workflow": "node --loader ts-node/esm ./src/index.ts",
@@ -42,14 +43,17 @@
     "prepare": "is-ci || husky install"
   },
   "devDependencies": {
+    "@types/jest": "^26.0.23",
     "@types/node": "^15.12.2",
     "@types/prompts": "^2.0.13",
     "@types/update-notifier": "^5.0.0",
     "eslint": "^7.28.0",
     "eslint-config-sumikko": "^1.1.2",
     "husky": "^6.0.0",
+    "jest": "^27.0.4",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.1",
+    "ts-jest": "^27.0.3",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
   },
@@ -68,6 +72,22 @@
   "lint-staged": {
     "*.{js,ts}": [
       "prettier --write"
+    ]
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "useESM": true
+      }
+    },
+    "preset": "ts-jest/presets/js-with-ts-esm",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
     ]
   }
 }
