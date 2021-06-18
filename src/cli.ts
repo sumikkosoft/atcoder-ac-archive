@@ -4,7 +4,7 @@ import { program } from "commander";
 import pjson from "pjson";
 import updateNotifier from "update-notifier";
 import * as commands from "./commands/index.js";
-import { DbService } from "./utils/database.js";
+import { DbService } from "./utils/databaseService.js";
 
 const db = new DbService();
 

@@ -10,7 +10,7 @@
     "a3": "./lib/cli.js"
   },
   "engines": {
-    "node": ">= 12"
+    "node": ">= 12.2.0"
   },
   "license": "MIT",
   "author": {
@@ -45,7 +45,7 @@
     "eslint": "^7.28.0",
     "eslint-config-sumikko": "^1.1.2",
     "ts-node": "^10.0.0",
-    "typescript": "^4.3.2"
+    "typescript": "^4.3.4"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -53,6 +53,7 @@
     "commander": "^8.0.0-2",
     "dotenv": "^10.0.0",
     "lang2extension": "^0.1.4",
+    "lowdb": "^2.1.0",
     "pjson": "^1.0.9",
     "prompts": "^2.4.1",
     "update-notifier": "^5.1.0"

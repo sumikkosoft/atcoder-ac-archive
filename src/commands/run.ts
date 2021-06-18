@@ -1,14 +1,14 @@
 import fs from "fs";
 import path from "path";
-import type { DbService } from "../utils/database.js";
-import { getCode } from "../utils/getCode.js";
+import { Db } from "../types/DatabaseService";
+import { fetchCode } from "../utils/fetchCode.js";
 
 type Props = {
-  db: DbService;
+  db: Db;
 };
 
 export const run = async ({ db }: Props) => {
-  const code = await getCode();
+  const code = await fetchCode();
   const archiveDir = path.join(db.getArchiveDir() || process.cwd(), "atcoder.jp");
   if (!fs.existsSync(archiveDir)) {
     fs.mkdirSync(archiveDir);

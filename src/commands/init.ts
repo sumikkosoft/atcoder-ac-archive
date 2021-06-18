@@ -1,11 +1,29 @@
 import prompts from "prompts";
-import type { ConfigSchema, DbService } from "../utils/database.js";
+import { Config, Db } from "../types/DatabaseService";
 
 type Props = {
-  db: DbService;
+  db: Db;
 };
 
-const userInput = async () => {
+// const inputConfirm = async () => {
+//   const onCancel = () => {
+//     throw new Error("Could not confirm your input, Try again");
+//   };
+
+//   return prompts(
+//     [
+//       {
+//         type: "confirm",
+//         name: "register",
+//         message: "既にデータが存在しますが初期化しますか？",
+//         initial: true,
+//       },
+//     ],
+//     { onCancel }
+//   ).then<{ register: boolean }>((input) => input);
+// };
+
+const inputUserData = async () => {
   const onCancel = () => {
     throw new Error("Could not confirm your input, Try again");
   };
@@ -24,30 +42,21 @@ const userInput = async () => {
         message: "保存したいディレクトリパスを入力してください(default: process.cwd())",
         initial: "",
       },
-      {
-        type: "confirm",
-        name: "register",
-        message: "登録します",
-        initial: true,
-      },
     ],
     { onCancel }
-  ).then<{ userId: string; archiveDir: string; register: boolean }>((input) => input);
+  ).then<{ userId: string; archiveDir: string }>((input) => input);
 };
 
 export const init = async ({ db }: Props) => {
   try {
-    const input = await userInput();
-    if (input.register) {
-      const configs: ConfigSchema = {
-        user_id: input.userId,
-        archive_dir: input.archiveDir,
-      };
-      const result = db.setConfig(configs);
-      result && console.log("登録完了");
-    } else {
-      console.error("登録しませんでした");
-    }
+    const userInput = await inputUserData();
+
+    const configs: Config = {
+      user_id: userInput.userId,
+      archive_dir: userInput.archiveDir,
+    };
+    const result = db.setConfig(configs);
+    result ? console.log("登録完了") : console.error("登録できませんでした");
   } catch (e) {
     console.error(e);
   }

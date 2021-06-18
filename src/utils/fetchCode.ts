@@ -33,7 +33,7 @@ export const parseHtml = async (html: string) => {
   return code;
 };
 
-export const getCode = async () => {
+export const fetchCode = async () => {
   const sub: SubmissionsData = {
     id: 23310218,
     epoch_second: 1623230372,
