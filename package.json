@@ -2,10 +2,12 @@
   "name": "a3-cli",
   "version": "0.0.1",
   "description": "AtCoder でACしたソースコードをGitHub or ローカルに保存します",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "bin": {
-    "a3": "./dist/cli.js"
+    "a3": "./lib/cli.js"
   },
   "engines": {
     "node": ">= 12"
@@ -31,9 +33,9 @@
     "dist"
   ],
   "scripts": {
-    "start": "tsc -w",
-    "dev:workflow": "ts-node -T ./src/index.ts",
-    "dev:cli": "ts-node -T ./src/cli.ts",
+    "watch": "tsc -w",
+    "dev:workflow": "node --loader ts-node/esm ./src/index.ts",
+    "dev:cli": "node --loader ts-node/esm ./src/cli.ts",
     "type-check": "tsc --noEmit"
   },
   "devDependencies": {

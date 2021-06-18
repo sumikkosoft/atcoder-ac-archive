@@ -1,5 +1,5 @@
-import { config } from "./config";
-import { init } from "./init";
-import { run } from "./run";
+import { config } from "./config.js";
+import { init } from "./init.js";
+import { run } from "./run.js";
 
 export { init, run, config };

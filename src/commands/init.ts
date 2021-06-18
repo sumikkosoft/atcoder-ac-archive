@@ -1,5 +1,5 @@
 import prompts from "prompts";
-import type { ConfigSchema, DbService } from "../utils/database";
+import type { ConfigSchema, DbService } from "../utils/database.js";
 
 type Props = {
   db: DbService;

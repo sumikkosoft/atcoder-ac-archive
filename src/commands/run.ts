@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
-import type { DbService } from "../utils/database";
-import { getCode } from "../utils/getCode";
+import type { DbService } from "../utils/database.js";
+import { getCode } from "../utils/getCode.js";
 
 type Props = {
   db: DbService;

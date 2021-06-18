@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
-import defaultJson from "../configs/defaultConfig.json";
-import { JsonDbUtil } from "./jsonDb";
+import { JsonDbUtil } from "./jsonDb.js";
 
 export type ConfigSchema = {
   user_id: string;
@@ -36,7 +35,10 @@ export class DbService {
       this.database = new JsonDbUtil(path.join(this.configPath, configTree));
     } else {
       fs.mkdirSync(path.join(this.configPath, ".a3"));
-      fs.writeFileSync(path.join(this.configPath, configTree), JSON.stringify(defaultJson));
+      fs.writeFileSync(
+        path.join(this.configPath, configTree),
+        JSON.stringify(import("../configs/defaultConfig.json"))
+      );
       this.database = new JsonDbUtil(path.join(this.configPath, configTree));
     }
   }

@@ -1,4 +1,4 @@
-import type { DbService } from "../utils/database";
+import type { DbService } from "../utils/database.js";
 
 type Props = {
   db: DbService;
