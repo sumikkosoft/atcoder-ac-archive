@@ -1,6 +1,10 @@
 # AtCoder AC Archive
 
-AtCoder で AC したソースコードを GitHub or ローカルに保存します
+AtCoder で AC したソースコードを GitHub 上 or ローカルに保存します
+
+GitHub Actions を利用した自動収集とローカルでの実行が可能な予定です
+
+_※ 実装途中です_
 
 ## Usages
 
@@ -14,8 +18,7 @@ $ npm install --global a3-cli
 
 ```shell
 $ a3 init
-// -> id,dirの設定
-$ a3 run
+$ a3 archive
 ```
 
 #### GitHub Actions
@@ -28,7 +31,12 @@ $ a3 run
 
 ## 進捗
 
-3%
+- [x] CLI コマンドの追加
+- [x] ローカルでのソースコードの取得・保存
+- [x] 保存したソースコードを列挙・管理
+- [ ] jest を書く
+- [ ] npm.js に公開
+- [ ] GitHub Actions の設定
 
 ## License
 

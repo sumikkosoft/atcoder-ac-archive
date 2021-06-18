@@ -5,7 +5,7 @@ type Props = {
   db: Db;
 };
 
-export const run = async ({ db }: Props) => {
+export const archive = async ({ db }: Props) => {
   const userId = db.getUserId();
   if (!userId) return;
   console.log(`${userId}のデータを取得します`);

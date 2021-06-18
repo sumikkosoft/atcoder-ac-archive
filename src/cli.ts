@@ -16,11 +16,11 @@ program
   });
 
 program
-  .command("run")
+  .command("archive")
   .description("ソースコード取得の実行")
   .action(() => {
     if (db.getUserId()) {
-      commands.run({ db });
+      commands.archive({ db });
     } else {
       console.error("`a3 init` で初期化してください");
     }
