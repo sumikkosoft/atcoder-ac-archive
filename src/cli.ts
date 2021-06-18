@@ -36,7 +36,9 @@ const config = program
     } else {
       console.error("`a3 init` で初期化してください");
     }
-  });
+  })
+  .helpOption("-h, --help", "コマンド一覧を表示")
+  .showHelpAfterError("`a3 config --help` でコマンドリストを確認してください");
 config
   .command("user.id <USER_ID>")
   .description("登録しているuserIdを変更")

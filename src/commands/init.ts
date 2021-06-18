@@ -5,24 +5,6 @@ type Props = {
   db: Db;
 };
 
-// const inputConfirm = async () => {
-//   const onCancel = () => {
-//     throw new Error("Could not confirm your input, Try again");
-//   };
-
-//   return prompts(
-//     [
-//       {
-//         type: "confirm",
-//         name: "register",
-//         message: "既にデータが存在しますが初期化しますか？",
-//         initial: true,
-//       },
-//     ],
-//     { onCancel }
-//   ).then<{ register: boolean }>((input) => input);
-// };
-
 const inputUserData = async () => {
   const onCancel = () => {
     throw new Error("Could not confirm your input, Try again");
@@ -39,7 +21,7 @@ const inputUserData = async () => {
       {
         type: "text",
         name: "archiveDir",
-        message: "保存したいディレクトリパスを入力してください(default: process.cwd())",
+        message: "保存したいディレクトリパスを入力してください(未実装)",
         initial: "",
       },
     ],

@@ -1,4 +1,4 @@
-type UserData = {
+export type UserInfo = {
   id: number;
   epoch_second: number;
   problem_id: string;

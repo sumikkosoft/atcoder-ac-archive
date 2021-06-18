@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "AtCoder でACしたソースコードをGitHub or ローカルに保存します",
   "type": "module",
-  "main": "index.js",
   "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "bin": {
@@ -33,10 +32,14 @@
     "dist"
   ],
   "scripts": {
+    "workflow": "node --loader ts-node/esm ./src/index.ts",
     "watch": "tsc -w",
     "dev:workflow": "node --loader ts-node/esm ./src/index.ts",
     "dev:cli": "node --loader ts-node/esm ./src/cli.ts",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build": "",
+    "format": "prettier -w ./src/*",
+    "prepare": "is-ci || husky install"
   },
   "devDependencies": {
     "@types/node": "^15.12.2",
@@ -44,6 +47,9 @@
     "@types/update-notifier": "^5.0.0",
     "eslint": "^7.28.0",
     "eslint-config-sumikko": "^1.1.2",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.1",
     "ts-node": "^10.0.0",
     "typescript": "^4.3.4"
   },
@@ -54,8 +60,14 @@
     "dotenv": "^10.0.0",
     "lang2extension": "^0.1.4",
     "lowdb": "^2.1.0",
+    "ora": "^5.4.1",
     "pjson": "^1.0.9",
     "prompts": "^2.4.1",
     "update-notifier": "^5.1.0"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "prettier --write"
+    ]
   }
 }

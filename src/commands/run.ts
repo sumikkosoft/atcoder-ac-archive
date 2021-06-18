@@ -1,17 +1,14 @@
-import fs from "fs";
-import path from "path";
 import { Db } from "../types/DatabaseService";
-import { fetchCode } from "../utils/fetchCode.js";
+import { workflow } from "../utils/workflow.js";
 
 type Props = {
   db: Db;
 };
 
 export const run = async ({ db }: Props) => {
-  const code = await fetchCode();
-  const archiveDir = path.join(db.getArchiveDir() || process.cwd(), "atcoder.jp");
-  if (!fs.existsSync(archiveDir)) {
-    fs.mkdirSync(archiveDir);
-  }
-  fs.writeFileSync(path.join(archiveDir, "test.py"), code);
+  const userId = db.getUserId();
+  if (!userId) return;
+  console.log(`${userId}のデータを取得します`);
+
+  await workflow(userId);
 };

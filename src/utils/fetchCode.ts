@@ -1,21 +1,16 @@
 import axios from "axios";
 import { load } from "cheerio";
+import { UserInfo } from "../types/UserInfo";
 
-type SubmissionsData = {
-  id: number;
-  epoch_second: number;
-  problem_id: string;
-  contest_id: string;
-  user_id: string;
-  language: string;
-  point: number;
-  length: number;
-  result: string;
-  execution_time: number;
+export const requestAp = async (user_id: string, unix: number) => {
+  const url = `https://kenkoooo.com/atcoder/atcoder-api/v3/user/submissions?user=${user_id}&from_second=${unix}`;
+  return axios
+    .get<UserInfo[]>(url, { headers: { "Accept-Encoding": "gzip" } })
+    .then(({ data }) => data);
 };
 
-export const requestHtml = async (submissionsData: SubmissionsData) => {
-  const url = `https://atcoder.jp/contests/${submissionsData.contest_id}/submissions/${submissionsData.id}`;
+const requestHtml = async ({ contest_id, id }: UserInfo) => {
+  const url = `https://atcoder.jp/contests/${contest_id}/submissions/${id}`;
   const html = axios
     .get<string>(url, {
       headers: { "Content-Type": "text/html" },
@@ -26,27 +21,15 @@ export const requestHtml = async (submissionsData: SubmissionsData) => {
   return html;
 };
 
-export const parseHtml = async (html: string) => {
+const parseHtml = async (html: string) => {
   const $ = load(html);
-  const code = $("#submission-code").text();
+  const submissionCode = $("#submission-code").text();
 
-  return code;
+  return submissionCode;
 };
 
-export const fetchCode = async () => {
-  const sub: SubmissionsData = {
-    id: 23310218,
-    epoch_second: 1623230372,
-    problem_id: "abc198_b",
-    contest_id: "abc198",
-    user_id: "ivgtr",
-    language: "Python (3.8.2)",
-    point: 200,
-    length: 146,
-    result: "AC",
-    execution_time: 24,
-  };
-  const html = await requestHtml(sub);
-  const code = await parseHtml(html);
-  return code;
+export const fetchCode = async (submission: UserInfo) => {
+  const html = await requestHtml(submission);
+  const submissionCode = await parseHtml(html);
+  return submissionCode;
 };

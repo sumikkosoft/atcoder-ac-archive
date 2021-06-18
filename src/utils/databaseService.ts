@@ -2,11 +2,8 @@ import * as fs from "fs";
 import { JSONFileSync, LowSync } from "lowdb";
 import { createRequire } from "module";
 import path from "path";
-import * as url from "url";
 
 const require = createRequire(import.meta.url);
-const __filename = url.fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export type ConfigSchema = {
   user_id: string;
@@ -18,30 +15,34 @@ const rootPath = path.join(
 );
 
 export class DbService {
-  public readonly configPath: string;
-  private readonly database: LowSync<{ config: ConfigSchema[] }>;
+  public readonly configDir: string;
+  public readonly configFile: string;
+  private readonly database: LowSync<{ config: ConfigSchema }>;
 
   constructor() {
     // 開発時はprocess.cwd() で管理する
-    this.configPath = process.cwd() || rootPath || __dirname;
-    fs.mkdirSync(path.join(this.configPath, ".a3/"), { recursive: true });
+    this.configDir = path.join(
+      process.env.NODE_ENV !== "production" ? process.cwd() : rootPath,
+      ".a3/"
+    );
+    this.configFile = path.join(this.configDir, "config.json");
+
+    fs.mkdirSync(this.configDir, { recursive: true });
 
     try {
-      fs.accessSync(path.join(this.configPath, ".a3/config.json"));
+      fs.accessSync(path.join(this.configFile));
     } catch {
       const json = JSON.stringify(require("../configs/defaultConfig.json"), null, 2);
-      fs.writeFileSync(path.join(this.configPath, ".a3/config.json"), json);
+      fs.writeFileSync(this.configFile, json);
     }
 
-    this.database = new LowSync<{ config: ConfigSchema[] }>(
-      new JSONFileSync(path.join(this.configPath, ".a3/config.json"))
-    );
+    this.database = new LowSync<{ config: ConfigSchema }>(new JSONFileSync(this.configFile));
   }
 
   getJson() {
     this.database.read();
     if (this.database.data?.config) {
-      const configs = this.database.data.config[0] as ConfigSchema;
+      const configs = this.database.data.config as ConfigSchema;
       return configs;
     }
     return undefined;
@@ -50,26 +51,26 @@ export class DbService {
   getUserId() {
     this.database.read();
     if (this.database.data?.config) {
-      const configs = this.database.data.config[0] as ConfigSchema;
+      const configs = this.database.data.config as ConfigSchema;
       return configs.user_id;
     }
     return undefined;
   }
 
-  getArchiveDir() {
-    this.database.read();
-    if (this.database.data?.config) {
-      const configs = this.database.data.config[0] as ConfigSchema;
-      return configs.archive_dir;
-    }
-    return undefined;
-  }
+  // getArchiveDir() {
+  //   this.database.read();
+  //   if (this.database.data?.config) {
+  //     const configs = this.database.data.config as ConfigSchema;
+  //     return configs.archive_dir;
+  //   }
+  //   return undefined;
+  // }
 
   setUserId(id: string) {
     this.database.read();
     if (this.database.data?.config) {
-      const configs = this.database.data.config[0] as ConfigSchema;
-      this.database.data.config[0] = {
+      const configs = this.database.data.config as ConfigSchema;
+      this.database.data.config = {
         ...configs,
         user_id: id,
       };
@@ -83,23 +84,22 @@ export class DbService {
   setArchiveDir(dir: string) {
     this.database.read();
     if (this.database.data?.config) {
-      const configs = this.database.data.config[0] as ConfigSchema;
-      this.database.data.config[0] = {
+      const configs = this.database.data.config as ConfigSchema;
+      this.database.data.config = {
         ...configs,
         archive_dir: dir,
       };
-
       this.database.write();
 
       return dir;
     }
     return undefined;
   }
+
   setConfig(configs: ConfigSchema) {
     this.database.read();
-    console.log(this.database.data);
     if (this.database.data?.config) {
-      this.database.data.config[0] = configs;
+      this.database.data.config = configs;
       this.database.write();
 
       return configs;
