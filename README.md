@@ -1,7 +1,5 @@
 # AtCoder AC Archive
 
----
-
 AtCoder で AC したソースコードを GitHub or ローカルに保存します
 
 ## Usages
@@ -20,7 +18,7 @@ $ a3 init
 $ a3 run
 ```
 
-#### GitHub
+#### GitHub Actions
 
 ##### Setup
 
