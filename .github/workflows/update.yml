@@ -1,0 +1,32 @@
+name: Update
+on:
+  push:
+    branches:
+      - master
+      - main
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    name: "Update"
+    runs-on: ubuntu-18.04
+
+    if: github.repository != 'ivgtr/atcoder-ac-archive' # DO NOT RUN in ivgtr/atcoder-ac-archive
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Install
+        run: npm ci
+      - name: Update
+        run: |
+          npm run workflow
+        env:
+          USER_ID: ${{ secrets.USER_ID }}
+          GITHUB_ID: ${{ secrets.GITHUB_ID }}
+          cGITHUB_EMAIL: ${{ secrets.GITHUB_EMAIL }}
