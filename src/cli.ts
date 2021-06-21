@@ -4,23 +4,21 @@ import { program } from "commander";
 import pjson from "pjson";
 import updateNotifier from "update-notifier";
 import * as commands from "./commands/index.js";
-import { DbService } from "./utils/databaseService.js";
-
-const db = new DbService();
+import { DbService, isDb } from "./utils/databaseService.js";
 
 program
   .command("init")
   .description("初期設定")
   .action(() => {
-    commands.init({ db });
+    commands.init({ db: new DbService() });
   });
 
 program
   .command("archive")
   .description("ソースコード取得の実行")
   .action(() => {
-    if (db.getUserId()) {
-      commands.archive({ db });
+    if (isDb()) {
+      commands.archive({ db: new DbService() });
     } else {
       console.error("`a3 init` で初期化してください");
     }
@@ -30,8 +28,8 @@ const config = program
   .command("config")
   .description("コンフィグの確認・設定")
   .action(() => {
-    if (db.getUserId()) {
-      commands.config({ db });
+    if (isDb()) {
+      commands.config({ db: new DbService() });
       config.help();
     } else {
       console.error("`a3 init` で初期化してください");
@@ -43,8 +41,8 @@ config
   .command("user.id <USER_ID>")
   .description("登録しているuserIdを変更")
   .action((userId: string) => {
-    if (db.getUserId()) {
-      commands.config({ db, userId });
+    if (isDb()) {
+      commands.config({ db: new DbService(), userId });
     } else {
       console.error("`a3 init` で初期化してください");
     }
@@ -53,8 +51,18 @@ config
   .command("archive.dir <ARCHIVE_DIR>")
   .description("登録しているarchiveDirを変更")
   .action((archiveDir: string) => {
-    if (db.getUserId()) {
-      commands.config({ db, archiveDir });
+    if (isDb()) {
+      commands.config({ db: new DbService(), archiveDir });
+    } else {
+      console.error("`a3 init` で初期化してください");
+    }
+  });
+config
+  .command("open")
+  .description("設定ファイルを保存しているディレクトリを表示します")
+  .action(() => {
+    if (isDb()) {
+      commands.open({ db: new DbService() });
     } else {
       console.error("`a3 init` で初期化してください");
     }

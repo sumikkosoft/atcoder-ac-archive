@@ -64,9 +64,11 @@
     "dotenv": "^10.0.0",
     "lang2extension": "^0.1.4",
     "lowdb": "^2.1.0",
+    "open": "^8.2.1",
     "ora": "^5.4.1",
     "pjson": "^1.0.9",
     "prompts": "^2.4.1",
+    "simple-git": "^2.40.0",
     "update-notifier": "^5.1.0"
   },
   "lint-staged": {

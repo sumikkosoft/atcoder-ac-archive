@@ -15,13 +15,13 @@ const inputUserData = async () => {
       {
         type: "text",
         name: "userId",
-        message: "ソースコードを保存したいユーザーidを入力してください",
+        message: "保存したいAtCoder のuserId",
         validate: (value: string) => (!value ? "Please enter." : true),
       },
       {
         type: "text",
         name: "archiveDir",
-        message: "保存したいディレクトリパスを入力してください(未実装)",
+        message: "保存したいディレクトリの絶対パス",
         initial: "",
       },
     ],

@@ -1,4 +1,4 @@
-import { workflow } from "./utils/workflow";
+import { workflow } from "./utils/workflow.js";
 
 export default (async () => {
   if (process.env.NODE_ENV !== "production") {
@@ -6,4 +6,5 @@ export default (async () => {
   }
   const id = process.env.USER_ID;
   if (id) await workflow(id);
+  else console.error("idが設定されていません");
 })();

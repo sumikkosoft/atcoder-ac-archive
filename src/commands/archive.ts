@@ -6,9 +6,9 @@ type Props = {
 };
 
 export const archive = async ({ db }: Props) => {
-  const userId = db.getUserId();
-  if (!userId) return;
-  console.log(`${userId}のデータを取得します`);
+  const result = db.getJson();
+  if (!result?.user_id) return;
+  console.log(`${result.user_id} のデータを取得します`);
 
-  await workflow(userId);
+  await workflow(result.user_id, result.archive_dir);
 };

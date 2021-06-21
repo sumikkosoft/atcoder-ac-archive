@@ -1,42 +1,52 @@
 import * as fs from "fs";
 import { JSONFileSync, LowSync } from "lowdb";
-import { createRequire } from "module";
 import path from "path";
-
-const require = createRequire(import.meta.url);
 
 export type ConfigSchema = {
   user_id: string;
   archive_dir: string;
 };
 
-const rootPath = path.join(
-  process.env[process.platform === "win32" ? "USERPROFILE" : "HOME"] || ""
+const INITIAL_CONFIG_STATE = {
+  config: { user_id: "", archive_dir: "" },
+};
+
+const rootPath = process.env[process.platform === "win32" ? "USERPROFILE" : "HOME"] || "";
+
+// 開発時はprocess.cwd() で管理する
+const configDir = path.join(
+  process.env.NODE_ENV !== "production" ? process.cwd() : rootPath,
+  ".a3-cli/"
 );
+const configFile = path.join(configDir, "config.json");
+
+export const isDb = () => {
+  try {
+    fs.accessSync(path.join(configFile));
+
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 export class DbService {
-  public readonly configDir: string;
-  public readonly configFile: string;
-  private readonly database: LowSync<{ config: ConfigSchema }>;
+  private readonly database!: LowSync<{ config: ConfigSchema }>;
 
   constructor() {
-    // 開発時はprocess.cwd() で管理する
-    this.configDir = path.join(
-      process.env.NODE_ENV !== "production" ? process.cwd() : rootPath,
-      ".a3/"
-    );
-    this.configFile = path.join(this.configDir, "config.json");
+    this.database = this.init();
+  }
 
-    fs.mkdirSync(this.configDir, { recursive: true });
+  private init() {
+    fs.mkdirSync(configDir, { recursive: true });
 
     try {
-      fs.accessSync(path.join(this.configFile));
+      fs.accessSync(path.join(configFile));
     } catch {
-      const json = JSON.stringify(require("../configs/defaultConfig.json"), null, 2);
-      fs.writeFileSync(this.configFile, json);
+      const json = JSON.stringify(INITIAL_CONFIG_STATE, null, 2);
+      fs.writeFileSync(configFile, json);
     }
-
-    this.database = new LowSync<{ config: ConfigSchema }>(new JSONFileSync(this.configFile));
+    return new LowSync<{ config: ConfigSchema }>(new JSONFileSync(configFile));
   }
 
   getJson() {
@@ -57,14 +67,18 @@ export class DbService {
     return undefined;
   }
 
-  // getArchiveDir() {
-  //   this.database.read();
-  //   if (this.database.data?.config) {
-  //     const configs = this.database.data.config as ConfigSchema;
-  //     return configs.archive_dir;
-  //   }
-  //   return undefined;
-  // }
+  getArchiveDir() {
+    this.database.read();
+    if (this.database.data?.config) {
+      const configs = this.database.data.config as ConfigSchema;
+      return configs.archive_dir;
+    }
+    return undefined;
+  }
+
+  getConfigDir() {
+    return configDir;
+  }
 
   setUserId(id: string) {
     this.database.read();
