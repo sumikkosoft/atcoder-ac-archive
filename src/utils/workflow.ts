@@ -64,7 +64,7 @@ export const workflow = async (userId: string) => {
 
       await fs.mkdir(saveDir, { recursive: true });
 
-      await fs.writeFile(path.join(saveDir, `${submission.id}${extention}`), code);
+      await fs.writeFile(path.join(saveDir, `${submission.id}${extention || ".txt"}`), code);
 
       saveSubmissions.push(submission);
 
