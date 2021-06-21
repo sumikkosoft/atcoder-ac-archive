@@ -28,7 +28,7 @@ export const workflow = async (userId: string) => {
     return fs.writeFile(datasetFile, JSON.stringify(json, null, 2));
   });
 
-  const database = new Low<{ last_unix: number; dataset: UserInfo[] }>(new JSONFile(datasetFile));
+  const database = new Low<{ last_unix: number }>(new JSONFile(datasetFile));
   await database.read();
 
   if (database.data) {
@@ -75,7 +75,6 @@ export const workflow = async (userId: string) => {
     }
 
     if (saveSubmissions.length) {
-      database.data.dataset = database.data.dataset.concat(saveSubmissions);
       database.data.last_unix = saveSubmissions[saveSubmissions.length - 1].epoch_second;
 
       await database.write();
