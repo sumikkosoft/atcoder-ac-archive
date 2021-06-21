@@ -4,7 +4,7 @@ AtCoder で AC したソースコードを GitHub 上 or ローカルに保存�
 
 GitHub Actions を利用した自動収集とローカルでの実行が可能な予定です
 
-_※ 実装途中です_
+_※ 実装途中_
 
 ## Usages
 
@@ -16,10 +16,15 @@ _※ 実装途中です_
 $ npm install --global a3-cli
 ```
 
-```shell
-$ a3 init
-$ a3 archive
-```
+1. `a3 init` を実行し、初期設定を行ってください
+1. `a3 config <PROPERTIES>` で設定を書き換える事ができます
+1. `a3 config open` で直接設定を書き換えることもできます:
+   - **config.user_id:** 利用する AtCoder の ID
+   - **config.archive_dir:** 保存先のディレクトリ
+   - **config.github_id:** commit に使用する GitHub ID
+   - **config.github_email:** commit に使用する GitHub Email
+   - **config.github_repository:** commit に使用する GitHub Remote Repository
+1. `a3 archive` でコードを収集します
 
 #### GitHub Actions
 
@@ -28,6 +33,10 @@ $ a3 archive
 1. この repository を Fork します
 1. `.github/workflows/schedule.yml` の[環境変数](https://github.com/ivgtr/atcoder-ac-archive/blob/master/.github/workflows/schedule.yml#L24-L31) を編集します:
    - **USER_ID:** 利用する AtCoder の ID
+   - **ARCHIVE_DIR:** 保存先のディレクトリ
+   - **GITHUB_ID:** commit に使用する GitHub ID
+   - **cGITHUB_EMAIL:** commit に使用する GitHub Email
+   - **GITHUB_REPOSITORY:** commit に使用する GitHub Remote Repository
 
 ## 進捗
 
