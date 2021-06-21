@@ -1,4 +1,5 @@
-import { Db } from "../types/DatabaseService";
+import simpleGit from "simple-git";
+import type { Db } from "../types/DatabaseService";
 import { workflow } from "../utils/workflow.js";
 
 type Props = {
@@ -10,5 +11,30 @@ export const archive = async ({ db }: Props) => {
   if (!result?.user_id) return;
   console.log(`${result.user_id} のデータを取得します`);
 
-  await workflow(result.user_id, result.archive_dir);
+  const git = simpleGit(result.archive_dir);
+
+  await git
+    .init()
+    .addConfig("user.name", result.github_id || "null")
+    .addConfig("user.email", result.github_email || "null@null.null");
+
+  if (result.github_repository) {
+    console.log("true");
+    await git.addRemote("origin", result.github_repository);
+  }
+
+  await git.fetch();
+  const list = await git.branch();
+
+  const brachName = `atcoder.jp/${result.user_id}`;
+
+  if (!list.all.includes(`remotes/origin/${brachName}`)) {
+    await git.checkout(["--orphan", brachName]);
+    await git.reset(["--hard"]);
+  } else {
+    await git.pull(["origin", `${brachName}/${brachName}`]);
+    await git.checkout([brachName]);
+  }
+
+  await workflow(git, result.user_id, result.archive_dir);
 };

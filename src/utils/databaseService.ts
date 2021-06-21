@@ -3,6 +3,9 @@ import { JSONFileSync, LowSync } from "lowdb";
 import path from "path";
 
 export type ConfigSchema = {
+  github_id: string;
+  github_email: string;
+  github_repository: string;
   user_id: string;
   archive_dir: string;
 };

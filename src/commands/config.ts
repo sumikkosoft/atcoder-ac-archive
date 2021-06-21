@@ -1,4 +1,4 @@
-import { Db } from "../types/DatabaseService";
+import type { Db } from "../types/DatabaseService";
 
 type Props = {
   db: Db;
