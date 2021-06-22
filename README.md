@@ -13,23 +13,23 @@ GitHub Actions を利用した自動収集とローカルでの実行が可能�
 ##### setup
 
 ```shell
-$ npm install --global a3-cli
+$ npm install --global aaa-cli
 ```
 
-1. `a3 init` を実行し、初期設定を行ってください
-1. `a3 config <PROPERTIES>` で設定を書き換える事ができます
-1. `a3 config open` で設定ファイルのディレクトリが開くので直接設定を書き換えることもできます:
+1. `aaa init` を実行し、初期設定を行ってください
+1. `aaa config <PROPERTIES>` で設定を書き換える事ができます
+1. `aaa config open` で設定ファイルのディレクトリが開くので直接設定を書き換えることもできます:
    - **config.user_id:** 利用する AtCoder の ID
    - **config.archive_dir:** ソースコードの保存先、指定しない場合は実行場所に保存される
    - **config.github_id:** commit に使用する GitHub ID
    - **config.github_email:** commit に使用する GitHub Email
    - **config.github_repository:** commit に使用する GitHub Remote Repository
-1. `a3 archive` でコードを収集します
+1. `aaa archive` でコードを収集します
 
 ##### info
 
 ```shell
-$ a3 [COMMAND] -h
+$ aaa [COMMAND] -h
 ```
 
 #### GitHub Actions
