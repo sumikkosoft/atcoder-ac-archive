@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
 import { program } from "commander";
-import pjson from "pjson";
+import fs from "fs";
+import path from "path";
 import updateNotifier from "update-notifier";
+import { fileURLToPath } from "url";
 import * as commands from "./commands/index.js";
 import { DbService, isDb } from "./utils/databaseService.js";
 
@@ -104,12 +106,22 @@ program.on("command:*", () => {
     program.args.join(" ")
   );
 });
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-updateNotifier({ pkg: pjson }).notify();
+const cli = async (argv: string[]) => {
+  const packageJson = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, "../package.json")).toString()
+  );
 
-program
-  .name("a3")
-  .usage("[command]")
-  .version(pjson.version, "-v, --version", "a3-cliのバージョンを表示")
-  .helpOption("-h, --help", "コマンド一覧を表示")
-  .parse(process.argv);
+  updateNotifier({ pkg: packageJson }).notify();
+
+  program
+    .name("a3")
+    .usage("[command]")
+    .version(packageJson.version, "-v, --version", "a3-cliのバージョンを表示")
+    .helpOption("-h, --help", "コマンド一覧を表示");
+
+  await program.parseAsync(argv);
+};
+
+cli(process.argv);
