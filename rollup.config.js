@@ -7,13 +7,15 @@ import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
-import externals from "rollup-plugin-node-externals";
+import autoExternals from "rollup-plugin-auto-external";
+import nodeExternals from "rollup-plugin-node-externals";
 import shebang from "rollup-plugin-preserve-shebang";
 import { terser } from "rollup-plugin-terser";
 import { visualizer } from "rollup-plugin-visualizer";
 
 const plugins = {
-  externals: externals(),
+  externals: autoExternals(),
+  nodeExternals: nodeExternals(),
   shebang: shebang(),
   json: json(),
   commonjs: commonjs({ extensions: [".js", ".ts"] }),
@@ -28,23 +30,24 @@ const plugins = {
   visualizer: visualizer(),
 };
 
-const settings = ({ name }) => ({
+const settings = ({ name, format }) => ({
   input: `./src/${name}.ts`,
   output: {
     file: `./lib/${name}.js`,
-    format: "esm",
+    format,
     sourcemap: true,
   },
   plugins: [
     plugins.externals,
+    plugins.nodeExternals,
     plugins.shebang,
     plugins.json,
     plugins.typescript,
     plugins.commonjs,
     plugins.nodeResolve,
     plugins.babel,
-    plugins.visualizer,
+    plugins.terser,
   ],
 });
 
-export default [settings({ name: "cli" })];
+export default [settings({ name: "cli", format: "esm" })];
