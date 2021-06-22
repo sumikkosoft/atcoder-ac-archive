@@ -5,7 +5,9 @@ type Props = {
   db: Db;
 };
 
+export const openDir = (dir: string) => o(dir).then(() => true);
+
 export const open = ({ db }: Props) => {
   const dir = db.getConfigDir();
-  o(dir);
+  return openDir(dir);
 };

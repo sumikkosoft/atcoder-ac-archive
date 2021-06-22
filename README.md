@@ -57,7 +57,7 @@ $ aaa [COMMAND] -h
 - [x] CLI コマンドの追加
 - [x] ローカルでのソースコードの取得・保存
 - [x] 保存したソースコードを列挙・管理
-- [ ] jest を書く
+- [ ] mocha でテスト書く
 - [ ] npm.js に公開
 - [x] GitHub Actions の設定
 

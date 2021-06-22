@@ -18,9 +18,9 @@
     "rootDir": "./src",
     "baseUrl": "./",
     "outDir": "./dist",
-    "noEmitOnError": true,
+    "noEmitOnError": false,
     "resolveJsonModule": true
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "lib", "dist"]
+  "exclude": ["node_modules", "tests"]
 }

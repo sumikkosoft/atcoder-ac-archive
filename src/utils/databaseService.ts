@@ -18,8 +18,8 @@ export type RegistarConfigSchema = {
   archive_dir?: string;
 };
 
-const INITIAL_CONFIG_STATE = {
-  config: { user_id: "", archive_dir: "" },
+const INITIAL_CONFIG_STATE: { config: ConfigSchema } = {
+  config: { user_id: "", archive_dir: "", github_email: "", github_id: "", github_repository: "" },
 };
 
 const rootPath = process.env[process.platform === "win32" ? "USERPROFILE" : "HOME"] || "";
@@ -85,36 +85,6 @@ export class DbService {
 
   getConfigDir() {
     return configDir;
-  }
-
-  setUserId(id: string) {
-    this.database.read();
-    if (this.database.data?.config) {
-      const configs = this.database.data.config as ConfigSchema;
-      this.database.data.config = {
-        ...configs,
-        user_id: id,
-      };
-      this.database.write();
-
-      return id;
-    }
-    return undefined;
-  }
-
-  setArchiveDir(dir: string) {
-    this.database.read();
-    if (this.database.data?.config) {
-      const configs = this.database.data.config as ConfigSchema;
-      this.database.data.config = {
-        ...configs,
-        archive_dir: dir,
-      };
-      this.database.write();
-
-      return dir;
-    }
-    return undefined;
   }
 
   setConfig(configs: RegistarConfigSchema) {
