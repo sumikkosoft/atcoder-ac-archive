@@ -29,10 +29,12 @@ $ npm install --global a3-cli
 ##### Setup
 
 1. この repository を Fork します
-1. `.github/workflows/schedule.yml` の[環境変数](https://github.com/ivgtr/atcoder-ac-archive/blob/master/.github/workflows/schedule.yml#L24-L31) を編集します:
+1. `.github/workflows/schedule.yml` の[環境変数](https://github.com/ivgtr/atcoder-ac-archive/blob/master/.github/workflows/update.yml#L30-L32) を編集します:
    - **USER_ID:** 利用する AtCoder の ID
-   - **GITHUB_ID:** commit に使用する GitHub ID
-   - **GITHUB_EMAIL:** commit に使用する GitHub Email
+   - **GH_ID:** commit に使用する GitHub の ID
+   - **GH_EMAIL:** commit に使用する GitHub の Email
+1. 環境変数はリポジトリの Secrets に登録しても直接書き換えても問題ないです
+1. スケジュール毎にコードが収集され、`atcoder.jp/<USER_ID>`ブランチに push されます
 
 ## 進捗
 
