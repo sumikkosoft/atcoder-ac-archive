@@ -2,7 +2,7 @@ import simpleGit from "simple-git";
 import { workflow } from "./utils/workflow.js";
 
 const main = async () => {
-  if (process.env.NODE_ENV !== "production") {
+  if (!process.env.CI) {
     (await import("dotenv")).config();
   }
   const { USER_ID: user_id, GITHUB_ID: github_id, GITHUB_EMAIL: github_email } = process.env;

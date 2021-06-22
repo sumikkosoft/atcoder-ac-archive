@@ -67,7 +67,7 @@ export const fetchAllCode = async (
     const sessionTime = new Date().getTime();
 
     // 300秒経過してたら終了
-    if (process.env.NODE_ENV === "production" && (sessionTime - startTime) / 1000 > 300) {
+    if (process.env.CI && (sessionTime - startTime) / 1000 > 300) {
       break;
     }
   }

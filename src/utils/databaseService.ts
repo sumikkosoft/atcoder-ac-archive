@@ -16,11 +16,7 @@ const INITIAL_CONFIG_STATE = {
 
 const rootPath = process.env[process.platform === "win32" ? "USERPROFILE" : "HOME"] || "";
 
-// 開発時はprocess.cwd() で管理する
-const configDir = path.join(
-  process.env.NODE_ENV !== "production" ? process.cwd() : rootPath,
-  ".a3-cli/"
-);
+const configDir = path.join(rootPath, ".a3-cli/");
 const configFile = path.join(configDir, "config.json");
 
 export const isDb = () => {
