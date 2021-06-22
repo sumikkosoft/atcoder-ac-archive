@@ -1,5 +1,7 @@
 # AtCoder AC Archive
 
+[![CI Test](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/test.yml) [![Publish to npm](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/publish.yml/badge.svg?branch=main)](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/publish.yml)
+
 AtCoder で AC したソースコードを GitHub 上 or ローカルに保存します
 
 GitHub Actions を利用した自動収集とローカルでの実行が可能です
@@ -23,6 +25,12 @@ $ npm install --global a3-cli
    - **config.github_email:** commit に使用する GitHub Email
    - **config.github_repository:** commit に使用する GitHub Remote Repository
 1. `a3 archive` でコードを収集します
+
+##### info
+
+```shell
+$ a3 [COMMAND] -h
+```
 
 #### GitHub Actions
 
