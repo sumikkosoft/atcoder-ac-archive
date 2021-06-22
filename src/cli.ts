@@ -58,8 +58,38 @@ config
     }
   });
 config
+  .command("gh.id <GITHUB_ID>")
+  .description("登録しているgithubIdを変更")
+  .action((ghId: string) => {
+    if (isDb()) {
+      commands.config({ db: new DbService(), ghId });
+    } else {
+      console.error("`a3 init` で初期化してください");
+    }
+  });
+config
+  .command("gh.email <GITHUB_EMAIL>")
+  .description("登録しているgithubEmailを変更")
+  .action((ghEmail: string) => {
+    if (isDb()) {
+      commands.config({ db: new DbService(), ghEmail });
+    } else {
+      console.error("`a3 init` で初期化してください");
+    }
+  });
+config
+  .command("gh.repo <GITHUB_REPOSITORY>")
+  .description("登録しているgithubRepositoryを変更")
+  .action((ghRepository: string) => {
+    if (isDb()) {
+      commands.config({ db: new DbService(), ghRepository });
+    } else {
+      console.error("`a3 init` で初期化してください");
+    }
+  });
+config
   .command("open")
-  .description("設定ファイルを保存しているディレクトリを表示します")
+  .description("設定ファイルを保存しているディレクトリを開きます")
   .action(() => {
     if (isDb()) {
       commands.open({ db: new DbService() });

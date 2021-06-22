@@ -10,6 +10,14 @@ export type ConfigSchema = {
   archive_dir: string;
 };
 
+export type RegistarConfigSchema = {
+  github_id?: string;
+  github_email?: string;
+  github_repository?: string;
+  user_id?: string;
+  archive_dir?: string;
+};
+
 const INITIAL_CONFIG_STATE = {
   config: { user_id: "", archive_dir: "" },
 };
@@ -109,10 +117,14 @@ export class DbService {
     return undefined;
   }
 
-  setConfig(configs: ConfigSchema) {
+  setConfig(configs: RegistarConfigSchema) {
     this.database.read();
     if (this.database.data?.config) {
-      this.database.data.config = configs;
+      const beforeConfigs = this.database.data.config as ConfigSchema;
+      this.database.data.config = {
+        ...beforeConfigs,
+        ...configs,
+      };
       this.database.write();
 
       return configs;
