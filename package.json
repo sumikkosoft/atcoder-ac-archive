@@ -1,7 +1,7 @@
 {
   "name": "a3-cli",
   "version": "0.0.1",
-  "description": "AtCoder でACしたソースコードをGitHub or ローカルに保存します",
+  "description": "AtCoder でACしたソースコードをGitHub上 or ローカルに保存します",
   "type": "module",
   "module": "./lib/index.js",
   "types": "./lib/index.d.ts",

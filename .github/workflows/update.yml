@@ -29,4 +29,4 @@ jobs:
         env:
           USER_ID: ${{ secrets.USER_ID }}
           GITHUB_ID: ${{ secrets.GITHUB_ID }}
-          cGITHUB_EMAIL: ${{ secrets.GITHUB_EMAIL }}
+          GITHUB_EMAIL: ${{ secrets.GITHUB_EMAIL }}
