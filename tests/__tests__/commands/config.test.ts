@@ -8,13 +8,7 @@ describe("src/command/config.ts", () => {
   describe("a3 config", () => {
     it("a3 config", async () => {
       const result = await config({ db });
-      expect(result).to.have.all.keys(
-        "github_id",
-        "github_email",
-        "github_repository",
-        "user_id",
-        "archive_dir"
-      );
+      expect(result).to.have.all.keys("github_id", "github_email", "user_id", "archive_dir");
     });
     it("a3 config user.id hoge", async () => {
       const userId = "hoge";

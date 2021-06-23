@@ -1,7 +1,7 @@
 import { Config, RegistarConfig } from "../../src/types/DatabaseService";
 
 const INITIAL_CONFIG_STATE: { config: Config } = {
-  config: { user_id: "", archive_dir: "", github_email: "", github_id: "", github_repository: "" },
+  config: { user_id: "", archive_dir: "", github_email: "", github_id: "" },
 };
 
 export class DbService {
