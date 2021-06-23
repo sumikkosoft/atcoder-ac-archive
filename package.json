@@ -1,6 +1,6 @@
 {
   "name": "aaa-cli",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "AtCoder でACしたソースコードをGitHub上 or ローカルに保存します",
   "type": "module",
   "module": "./lib/index.js",
