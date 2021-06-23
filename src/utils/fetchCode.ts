@@ -40,6 +40,14 @@ export const fetchAllCode = async (
   git: SimpleGit
 ) => {
   const saveSubmissions: UserInfo[] = [];
+  // 300秒経過してたら終了
+  const limitTime = 300;
+  let flag: boolean = false;
+
+  process.on("SIGINT", () => {
+    console.log("\n処理を終了します");
+    flag = true;
+  });
 
   // AtCoder へのスクレイピング
   for (let i = 0; i < submissions.length; i++) {
@@ -64,10 +72,9 @@ export const fetchAllCode = async (
     spinner.stop();
     spinner.clear();
 
-    const sessionTime = new Date().getTime();
+    const currentTime = new Date().getTime();
 
-    // 300秒経過してたら終了
-    if (process.env.CI && (sessionTime - startTime) / 1000 > 300) {
+    if ((process.env.CI && (currentTime - startTime) / 1000 > limitTime) || flag) {
       break;
     }
   }
