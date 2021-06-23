@@ -5,8 +5,8 @@ import { DbService } from "../../utils/databaseService.js";
 
 describe("src/command/config.ts", () => {
   const db = new DbService() as unknown as Db;
-  describe("aaa config", () => {
-    it("aaa config", async () => {
+  describe("a3 config", () => {
+    it("a3 config", async () => {
       const result = await config({ db });
       expect(result).to.have.all.keys(
         "github_id",
@@ -16,7 +16,7 @@ describe("src/command/config.ts", () => {
         "archive_dir"
       );
     });
-    it("aaa config user.id hoge", async () => {
+    it("a3 config user.id hoge", async () => {
       const userId = "hoge";
 
       const result = await config({ db, userId });

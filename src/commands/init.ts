@@ -34,7 +34,7 @@ const inputUserData = async () => {
         type: "text",
         name: "github_email",
         message: "Git にコミットするメールアドレス",
-        initial: "",
+        validate: (value: string) => (!value ? "Please enter." : true),
       },
       {
         type: "text",
@@ -56,7 +56,7 @@ export const init = async ({ db }: Props) => {
       user_id,
       archive_dir,
       github_email,
-      github_id,
+      github_id: github_id || user_id,
       github_repository,
     };
     const result = db.setConfig(configs);

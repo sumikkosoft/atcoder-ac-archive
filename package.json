@@ -1,12 +1,12 @@
 {
-  "name": "aaa-cli",
+  "name": "a3-cli",
   "version": "1.0.0",
   "description": "AtCoder でACしたソースコードをGitHub上 or ローカルに保存します",
   "type": "module",
   "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "bin": {
-    "aaa": "./lib/cli.js"
+    "a3": "./lib/cli.js"
   },
   "engines": {
     "node": ">= 12.2.0"

@@ -7,12 +7,12 @@
 // describe("src/command/open.ts", () => {
 //   const db = new DbService() as unknown as Db;
 
-//   describe("aaa open [command]", () => {
+//   describe("a3 open [command]", () => {
 //     beforeEach(() => {
 // sinon.spy(open, "openDir").returnValues(new Promise((r) => {r(true)}))
 // })
 
-//     it("aaa open", async () => {
+//     it("a3 open", async () => {
 //          let openResult = sinon.spy(open, "openDir")
 //       const result = await open.open({ db });
 

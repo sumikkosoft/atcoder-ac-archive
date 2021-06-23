@@ -22,7 +22,7 @@ program
     if (isDb()) {
       commands.archive({ db: new DbService() });
     } else {
-      console.error("`aaa init` で初期化してください");
+      console.error("`a3 init` で初期化してください");
     }
   });
 
@@ -34,11 +34,11 @@ const config = program
       commands.config({ db: new DbService() });
       config.help();
     } else {
-      console.error("`aaa init` で初期化してください");
+      console.error("`a3 init` で初期化してください");
     }
   })
   .helpOption("-h, --help", "コマンド一覧を表示")
-  .showHelpAfterError("`aaa config --help` でコマンドリストを確認してください");
+  .showHelpAfterError("`a3 config --help` でコマンドリストを確認してください");
 config
   .command("user.id <USER_ID>")
   .description("登録しているuserIdを変更")
@@ -46,7 +46,7 @@ config
     if (isDb()) {
       commands.config({ db: new DbService(), userId });
     } else {
-      console.error("`aaa init` で初期化してください");
+      console.error("`a3 init` で初期化してください");
     }
   });
 config
@@ -56,7 +56,7 @@ config
     if (isDb()) {
       commands.config({ db: new DbService(), archiveDir });
     } else {
-      console.error("`aaa init` で初期化してください");
+      console.error("`a3 init` で初期化してください");
     }
   });
 config
@@ -66,7 +66,7 @@ config
     if (isDb()) {
       commands.config({ db: new DbService(), ghId });
     } else {
-      console.error("`aaa init` で初期化してください");
+      console.error("`a3 init` で初期化してください");
     }
   });
 config
@@ -76,7 +76,7 @@ config
     if (isDb()) {
       commands.config({ db: new DbService(), ghEmail });
     } else {
-      console.error("`aaa init` で初期化してください");
+      console.error("`a3 init` で初期化してください");
     }
   });
 config
@@ -86,7 +86,7 @@ config
     if (isDb()) {
       commands.config({ db: new DbService(), ghRepository });
     } else {
-      console.error("`aaa init` で初期化してください");
+      console.error("`a3 init` で初期化してください");
     }
   });
 config
@@ -96,13 +96,13 @@ config
     if (isDb()) {
       commands.open({ db: new DbService() });
     } else {
-      console.error("`aaa init` で初期化してください");
+      console.error("`a3 init` で初期化してください");
     }
   });
 
 program.on("command:*", () => {
   console.error(
-    "Invalid command: %s\n`aaa --help` でコマンドリストを確認してください",
+    "Invalid command: %s\n`a3 --help` でコマンドリストを確認してください",
     program.args.join(" ")
   );
 });
@@ -116,9 +116,9 @@ const cli = async (argv: string[]) => {
   updateNotifier({ pkg: packageJson }).notify();
 
   program
-    .name("aaa")
+    .name("a3")
     .usage("[command]")
-    .version(packageJson.version, "-v, --version", "aaa-cliのバージョンを表示")
+    .version(packageJson.version, "-v, --version", "a3-cliのバージョンを表示")
     .helpOption("-h, --help", "コマンド一覧を表示");
 
   await program.parseAsync(argv);
