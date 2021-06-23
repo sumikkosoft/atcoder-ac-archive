@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import simpleGit from "simple-git";
 import type { Db } from "../types/DatabaseService";
+import { generateReadme } from "../utils/generateReadme.js";
 import { workflow } from "../utils/workflow.js";
 
 type Props = {
@@ -31,6 +32,12 @@ export const archive = async ({ db }: Props) => {
     if (!list.all.includes(brachName)) {
       await git.checkout(["--orphan", brachName]);
       await git.reset(["--hard"]);
+      const readme = generateReadme(result.user_id);
+      const dir = path.join(archiveDir, "README.md");
+      await fs.writeFile(dir, readme).then(async () => {
+        await git.add(dir);
+        await git.commit("init: create a README.md");
+      });
     } else {
       await git.checkout([brachName]);
     }

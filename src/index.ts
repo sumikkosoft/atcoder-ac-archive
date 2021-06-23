@@ -1,4 +1,7 @@
+import fs from "fs/promises";
+import path from "path";
 import simpleGit from "simple-git";
+import { generateReadme } from "./utils/generateReadme.js";
 import { workflow } from "./utils/workflow.js";
 
 const main = async () => {
@@ -19,6 +22,12 @@ const main = async () => {
     if (!list.all.includes(`remotes/origin/${brachName}`)) {
       await git.checkout(["--orphan", brachName]);
       await git.reset(["--hard"]);
+      const readme = generateReadme(user_id);
+      const dir = path.join(process.cwd(), "README.md");
+      await fs.writeFile(dir, readme).then(async () => {
+        await git.add(dir);
+        await git.commit("init: create a README.md");
+      });
     } else {
       await git.checkout([brachName]);
     }
