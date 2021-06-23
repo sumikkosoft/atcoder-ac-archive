@@ -6,6 +6,8 @@ AtCoder で AC したソースコードを GitHub 上 or ローカルに保存�
 
 GitHub Actions を利用した自動収集とローカルでの実行が可能です
 
+動いている[デモ](https://github.com/sumikkosoft/atcoder-ac-archive)
+
 ## Usages
 
 #### Local
@@ -36,12 +38,13 @@ $ aaa [COMMAND] -h
 
 ##### Setup
 
-1. この repository を Fork します
+1. このリポジトリ を Fork します
 1. `.github/workflows/schedule.yml` の[環境変数](https://github.com/ivgtr/atcoder-ac-archive/blob/master/.github/workflows/update.yml#L30-L32) を編集します:
    - **USER_ID:** 利用する AtCoder の ID
    - **GH_ID:** commit に使用する GitHub の ID
    - **GH_EMAIL:** commit に使用する GitHub の Email
 1. 環境変数はリポジトリの Secrets に登録しても直接書き換えても問題ないです
+1. リポジトリの Actions タブを開き、GitHub Actions を有効化し、Update Workflows を有効化してください
 1. スケジュール毎にコードが収集され、`atcoder.jp/<USER_ID>`ブランチに push されます
 
 ## 補足
@@ -52,14 +55,13 @@ $ aaa [COMMAND] -h
 
 ## 進捗
 
-ひとまず動かすことは可能
-
 - [x] CLI コマンドの追加
 - [x] ローカルでのソースコードの取得・保存
 - [x] 保存したソースコードを列挙・管理
 - [ ] mocha でテスト書く
 - [ ] npm.js に公開
 - [x] GitHub Actions の設定
+- [x] Readme を整える
 
 ## License
 
