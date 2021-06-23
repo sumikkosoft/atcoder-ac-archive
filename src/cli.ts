@@ -33,8 +33,8 @@ archive
   .action(() => {
     if (isDb()) {
       const db = new DbService();
-
-      commands.open({ dir: db.getArchiveDir() || process.cwd() });
+      const archiveDir = path.join(db.getArchiveDir() || process.cwd(), "/atcoder-ac-archive");
+      commands.open({ dir: archiveDir });
     } else {
       console.error("`a3 init` で初期化してください");
     }

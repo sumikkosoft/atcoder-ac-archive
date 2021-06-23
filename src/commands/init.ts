@@ -16,25 +16,25 @@ const inputUserData = async () => {
         type: "text",
         name: "user_id",
         message: "保存したいAtCoder のuserId",
-        validate: (value: string) => (!value ? "Please enter." : true),
+        validate: (value: string) => (!value ? "入力してください" : true),
       },
       {
         type: "text",
         name: "archive_dir",
-        message: "保存したいディレクトリの絶対パス",
+        message: "保存先の絶対パス、/atcoder-ac-archive ディレクトリが作られます",
         initial: "",
       },
       {
         type: "text",
         name: "github_id",
         message: "Git にコミットするid",
-        initial: "",
+        validate: (value: string) => (!value ? "入力してください" : true),
       },
       {
         type: "text",
         name: "github_email",
         message: "Git にコミットするメールアドレス",
-        validate: (value: string) => (!value ? "Please enter." : true),
+        validate: (value: string) => (!value ? "入力してください" : true),
       },
     ],
     { onCancel }
@@ -49,7 +49,7 @@ export const init = async ({ db }: Props) => {
       user_id,
       archive_dir,
       github_email,
-      github_id: github_id || user_id,
+      github_id,
     };
     const result = db.setConfig(configs);
     result ? console.log("登録完了") : console.error("登録できませんでした");
