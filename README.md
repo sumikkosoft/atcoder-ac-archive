@@ -25,7 +25,6 @@ $ npm install --global a3-cli
    - **config.archive_dir:** ソースコードの保存先、指定しない場合は実行場所に保存される
    - **config.github_id:** commit に使用する GitHub ID
    - **config.github_email:** commit に使用する GitHub Email
-   - **config.github_repository:** commit に使用する GitHub Remote Repository
 1. `a3 archive` でコードを収集します
 
 ##### info
@@ -45,7 +44,7 @@ $ a3 [COMMAND] -h
    - **GH_EMAIL:** commit に使用する GitHub の Email
 1. 環境変数はリポジトリの Secrets に登録しても直接書き換えても問題ないです
 1. リポジトリの Actions タブを開き、GitHub Actions を有効化し、Update Workflows を有効化してください
-1. スケジュール毎にコードが収集され、`atcoder.jp/<USER_ID>`ブランチに push されます
+1. スケジュール毎にコードが収集され、`atcoder.jp/<USER_ID>` ブランチに push されます
 
 ## 補足
 

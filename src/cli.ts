@@ -15,12 +15,26 @@ program
     commands.init({ db: new DbService() });
   });
 
-program
+const archive = program
   .command("archive")
   .description("ソースコード取得の実行")
   .action(() => {
     if (isDb()) {
       commands.archive({ db: new DbService() });
+    } else {
+      console.error("`a3 init` で初期化してください");
+    }
+  })
+  .helpOption("-h, --help", "コマンド一覧を表示")
+  .showHelpAfterError("`a3 archive --help` でコマンドリストを確認してください");
+archive
+  .command("open")
+  .description("ソースコードを保存しているディレクトリを開きます")
+  .action(() => {
+    if (isDb()) {
+      const db = new DbService();
+
+      commands.open({ dir: db.getArchiveDir() || process.cwd() });
     } else {
       console.error("`a3 init` で初期化してください");
     }
@@ -80,21 +94,13 @@ config
     }
   });
 config
-  .command("gh.repo <GITHUB_REPOSITORY>")
-  .description("登録しているgithubRepositoryを変更")
-  .action((ghRepository: string) => {
-    if (isDb()) {
-      commands.config({ db: new DbService(), ghRepository });
-    } else {
-      console.error("`a3 init` で初期化してください");
-    }
-  });
-config
   .command("open")
   .description("設定ファイルを保存しているディレクトリを開きます")
   .action(() => {
     if (isDb()) {
-      commands.open({ db: new DbService() });
+      const db = new DbService();
+
+      commands.open({ dir: db.getConfigDir() });
     } else {
       console.error("`a3 init` で初期化してください");
     }

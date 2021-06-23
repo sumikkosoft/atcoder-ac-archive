@@ -36,12 +36,6 @@ const inputUserData = async () => {
         message: "Git にコミットするメールアドレス",
         validate: (value: string) => (!value ? "Please enter." : true),
       },
-      {
-        type: "text",
-        name: "github_repository",
-        message: "GitHub Repository URL",
-        initial: "",
-      },
     ],
     { onCancel }
   ).then<Config>((input) => input);
@@ -49,15 +43,13 @@ const inputUserData = async () => {
 
 export const init = async ({ db }: Props) => {
   try {
-    const { user_id, archive_dir, github_email, github_id, github_repository } =
-      await inputUserData();
+    const { user_id, archive_dir, github_email, github_id } = await inputUserData();
 
     const configs: Config = {
       user_id,
       archive_dir,
       github_email,
       github_id: github_id || user_id,
-      github_repository,
     };
     const result = db.setConfig(configs);
     result ? console.log("登録完了") : console.error("登録できませんでした");

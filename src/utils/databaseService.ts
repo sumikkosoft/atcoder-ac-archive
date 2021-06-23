@@ -5,7 +5,6 @@ import path from "path";
 export type ConfigSchema = {
   github_id: string;
   github_email: string;
-  github_repository: string;
   user_id: string;
   archive_dir: string;
 };
@@ -13,13 +12,12 @@ export type ConfigSchema = {
 export type RegistarConfigSchema = {
   github_id?: string;
   github_email?: string;
-  github_repository?: string;
   user_id?: string;
   archive_dir?: string;
 };
 
 const INITIAL_CONFIG_STATE: { config: ConfigSchema } = {
-  config: { user_id: "", archive_dir: "", github_email: "", github_id: "", github_repository: "" },
+  config: { user_id: "", archive_dir: "", github_email: "", github_id: "" },
 };
 
 const rootPath = process.env[process.platform === "win32" ? "USERPROFILE" : "HOME"] || "";

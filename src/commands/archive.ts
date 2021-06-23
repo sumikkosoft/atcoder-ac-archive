@@ -18,10 +18,6 @@ export const archive = async ({ db }: Props) => {
     .addConfig("user.name", result.github_id)
     .addConfig("user.email", result.github_email);
 
-  if (result.github_repository) {
-    await git.addRemote("origin", result.github_repository);
-  }
-
   await git.fetch();
   const list = await git.branch();
 
