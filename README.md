@@ -44,23 +44,13 @@ $ a3 [COMMAND] -h
    - **GH_EMAIL:** commit に使用する GitHub の Email
 1. 環境変数はリポジトリの Secrets に登録しても直接書き換えても問題ないです
 1. リポジトリの Actions タブを開き、GitHub Actions を有効化し、Update Workflows を有効化してください
-1. スケジュール毎にコードが収集され、`atcoder.jp/<USER_ID>` ブランチに push されます
+1. スケジュール毎にコードが収集され、Fork したリポジトリの`atcoder.jp/<USER_ID>` ブランチに push されます
 
 ## 補足
 
 - AtCoder Problems API へのリクエストと AtCoder へのスクレイピングを行っており、負荷軽減のためどちらも 1~1.5 秒程スリープを挟んで叩くようにしています
 - AtCoder への負荷軽減と GitHub Actions のリミットの兼ね合いで、CI はスクレイピングの実行時間が 5 分を超えたタイミングで終了します
   - AC 数が多い方は全てのコードを取得するまでに GitHub Actions を何度か実行する必要があるかもしれません
-
-## 進捗
-
-- [x] CLI コマンドの追加
-- [x] ローカルでのソースコードの取得・保存
-- [x] 保存したソースコードを列挙・管理
-- [ ] mocha でテスト書く
-- [ ] npm.js に公開
-- [x] GitHub Actions の設定
-- [x] Readme を整える
 
 ## License
 
