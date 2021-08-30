@@ -83,7 +83,7 @@
     "lang2extension": "0.1.4",
     "lowdb": "2.1.0",
     "open": "8.2.1",
-    "ora": "5.4.1",
+    "ora": "6.0.0",
     "prompts": "2.4.1",
     "simple-git": "2.45.0",
     "update-notifier": "5.1.0"
