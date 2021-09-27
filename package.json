@@ -81,7 +81,7 @@
     "commander": "8.2.0",
     "dotenv": "10.0.0",
     "lang2extension": "0.1.4",
-    "lowdb": "2.1.0",
+    "lowdb": "3.0.0",
     "open": "8.2.1",
     "ora": "6.0.1",
     "prompts": "2.4.1",
