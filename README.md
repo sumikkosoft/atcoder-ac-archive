@@ -1,6 +1,6 @@
 # AtCoder AC Archive
 
-[![CI Test](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/test.yml) [![Publish to npm](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/publish.yml/badge.svg?branch=main)](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/publish.yml)
+[![CI Test](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/test.yml) [![Publish to npm](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/publish.yml/badge.svg)](https://github.com/ivgtr/atcoder-ac-archive/actions/workflows/publish.yml)
 
 AtCoder で AC したソースコードを GitHub 上 or ローカルに保存します
 
